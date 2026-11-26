@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: gather-social
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev && npm run check
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: gather-media
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f7f4">
+    <meta name="description" content="A small, thoughtful space to share the moments you want to keep.">
+    <title>Gather — share your everyday</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <main class="auth-screen" id="auth-screen">
+      <a class="wordmark auth-wordmark" href="#" aria-label="Gather home"><span class="brand-mark">g</span><span>gather</span></a>
+      <section class="auth-card" aria-labelledby="auth-title">
+        <p class="eyebrow">YOUR LITTLE CORNER</p>
+        <h1 id="auth-title">A good day to gather.</h1>
+        <p class="auth-intro">Share the moments you want to keep, with the people you care about.</p>
+        <form id="auth-form">
+          <label class="field-label" for="auth-username">Username</label>
+          <input class="auth-input" id="auth-username" name="username" autocomplete="username" minlength="3" maxlength="24" required>
+          <div id="display-name-field" class="hidden">
+            <label class="field-label" for="auth-display-name">Your name</label>
+            <input class="auth-input" id="auth-display-name" name="displayName" autocomplete="name" maxlength="60">
+          </div>
+          <div id="auth-email-field" class="hidden">
+            <label class="field-label" for="auth-email">Email for account recovery</label>
+            <input class="auth-input" id="auth-email" name="email" type="email" autocomplete="email" maxlength="254">
+          </div>
+          <label class="field-label" for="auth-password">Password</label>
+          <input class="auth-input" id="auth-password" name="password" type="password" autocomplete="current-password" minlength="10" maxlength="128" required>
+          <input id="reset-token" name="token" type="hidden">
+          <button class="create-button auth-submit" id="auth-submit" type="submit">Sign in</button>
+          <p class="form-error" id="auth-error" role="alert"></p>
+        </form>
+        <p class="auth-switch"><span id="auth-switch-copy">New here?</span> <button type="button" id="auth-mode-toggle">Create an account</button></p>
+        <button class="auth-forgot" id="forgot-password" type="button">Forgot your password?</button>
+        <p class="auth-note" id="auth-note">Your account and photos are stored on this app’s server.</p>
+      </section>
+    </main>
+
+    <div class="app-shell hidden" id="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="wordmark" href="#" data-view="home" aria-label="Gather home">
+          <span class="brand-mark" aria-hidden="true">g</span>
+          <span>gather</span>
+        </a>
+
+        <nav class="main-nav">
+          <button class="nav-item active" type="button" data-view="home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>
+            <span>Home</span>
+          </button>
+          <button class="nav-item" type="button" data-view="explore">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4M8 11h6M11 8v6"/></svg>
+            <span>Explore</span>
+          </button>
+          <button class="nav-item" type="button" data-view="saved">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4z"/></svg>
+            <span>Saved</span>
+          </button>
+          <button class="nav-item" type="button" data-view="profile">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg>
+            <span>My profile</span>
+          </button>
+          <button class="nav-item" type="button" data-action="messages">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-7.5 18-3.8-7.7L2 9.5 21 3Z"/><path d="M9.7 13.3 14 9"/></svg>
+            <span>Messages</span>
+            <span class="notification-count hidden" id="message-count"></span>
+          </button>
+        </nav>
+
+        <button class="create-button" type="button" data-action="create">
+          <span class="plus-icon" aria-hidden="true">+</span>
+          <span>Create a post</span>
+        </button>
+
+        <div class="sidebar-bottom">
+          <button class="nav-item" type="button" data-action="follow-requests">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+            <span>Follow requests</span>
+            <span class="notification-count hidden" id="request-count"></span>
+          </button>
+          <button class="nav-item" type="button" data-action="settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.5.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.5-.9l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.8l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.5-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.5.9l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.8Z"/></svg>
+            <span>Account settings</span>
+          </button>
+          <button class="nav-item hidden" id="admin-nav" type="button" data-action="moderation">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Moderation</span>
+          </button>
+          <div class="sidebar-profile">
+              <span class="avatar avatar-you" id="sidebar-avatar">?</span>
+              <span class="profile-copy"><strong id="sidebar-name">Your name</strong><small id="sidebar-username">@username</small></span>
+              <button class="more-button" type="button" aria-label="Sign out" data-action="logout">↗</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="mobile-header">
+          <a class="wordmark" href="#" data-view="home"><span class="brand-mark">g</span><span>gather</span></a>
+          <button class="icon-button" type="button" aria-label="Messages" data-action="messages">↗</button>
+        </header>
+
+        <div class="content-layout">
+          <section class="feed-column" aria-label="Your Gather feed">
+            <div class="feed-heading">
+              <div>
+                <p class="eyebrow" id="view-eyebrow">YOUR LITTLE CORNER</p>
+                <h1 id="view-title">A good day to gather.</h1>
+              </div>
+              <button class="round-create" type="button" data-action="create" aria-label="Create a post">+</button>
+            </div>
+
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="search-input" type="search" placeholder="Find a person or a moment" aria-label="Search people and posts">
+              <kbd>/</kbd>
+            </div>
+
+            <section class="stories-section" aria-label="24-hour stories">
+              <div class="section-label"><h2>Stories</h2><button type="button" data-action="create-story">Share a story</button></div>
+              <div class="stories" id="stories"></div>
+            </section>
+
+            <div class="feed-toolbar">
+              <h2 id="feed-label">From your people</h2>
+            </div>
+
+            <div class="post-list" id="post-list" aria-live="polite"></div>
+            <div class="empty-state hidden" id="empty-state">
+              <span class="empty-illustration" aria-hidden="true">✳</span>
+              <h2>Nothing here just yet</h2>
+              <p>Try another search, or make the first little moment.</p>
+              <button class="create-button compact" type="button" data-action="create">Create a post</button>
+            </div>
+            <div class="load-more-wrap hidden" id="load-more-wrap"><button class="sort-button" id="load-more" type="button">Show older posts</button></div>
+          </section>
+
+          <aside class="right-rail" aria-label="Suggestions">
+            <section class="welcome-card">
+              <span class="welcome-sparkle" aria-hidden="true">✳</span>
+              <p class="eyebrow">A NOTE TO SELF</p>
+              <h2>Small moments<br>make a life.</h2>
+              <p class="welcome-copy">A place for the little things you want to remember.</p>
+              <span class="welcome-byline">Take your time here <span aria-hidden="true">↗</span></span>
+            </section>
+            <section class="suggestions">
+              <div class="section-label"><h2>People to know</h2><button type="button" data-view="explore">Explore</button></div>
+              <div id="suggestion-list"></div>
+            </section>
+            <footer class="rail-footer">A softer corner of the internet.<br><span>Made for moments, not metrics.</span></footer>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-nav-item active" type="button" data-view="home" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></button>
+      <button class="mobile-nav-item" type="button" data-view="explore" aria-label="Explore"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4M8 11h6M11 8v6"/></svg></button>
+      <button class="mobile-nav-item mobile-add" type="button" data-action="create" aria-label="Create a post">+</button>
+      <button class="mobile-nav-item" type="button" data-view="saved" aria-label="Saved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4z"/></svg></button>
+      <button class="mobile-nav-item" type="button" data-view="profile" aria-label="Profile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg></button>
+    </nav>
+
+    <div class="modal-backdrop hidden" id="modal-backdrop">
+      <section class="composer-modal" role="dialog" aria-modal="true" aria-labelledby="composer-title">
+        <div class="modal-heading">
+          <div><p class="eyebrow">A MOMENT TO KEEP</p><h2 id="composer-title">Create a post</h2></div>
+          <button class="modal-close" type="button" aria-label="Close dialog" data-action="close-modal">×</button>
+        </div>
+        <form id="post-form">
+          <label class="upload-area" for="image-input" id="upload-area">
+            <span class="upload-icon" aria-hidden="true">↥</span>
+            <strong>Choose a photo</strong>
+            <span>JPEG, PNG or WebP · up to 10 MB</span>
+            <img class="upload-preview hidden" id="upload-preview" alt="Selected photo preview">
+          </label>
+          <input id="image-input" name="image" type="file" accept="image/jpeg,image/png,image/webp" class="visually-hidden">
+          <label class="field-label" for="caption-input">Add a caption</label>
+          <textarea id="caption-input" name="caption" maxlength="500" rows="3" placeholder="What would you like to remember?" required></textarea>
+          <div class="form-footer"><span id="caption-count">0 / 500</span><button class="create-button submit-button" type="submit">Share this moment <span aria-hidden="true">↗</span></button></div>
+          <p class="form-error" id="form-error" role="alert"></p>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop hidden" id="feature-backdrop">
+      <section class="feature-modal" role="dialog" aria-modal="true" aria-labelledby="feature-title">
+        <div class="modal-heading">
+          <div><p class="eyebrow">YOUR LITTLE CORNER</p><h2 id="feature-title">Messages</h2></div>
+          <button class="modal-close" type="button" aria-label="Close dialog" data-action="close-feature">×</button>
+        </div>
+        <div id="feature-content"></div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

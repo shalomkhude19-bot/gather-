@@ -1,0 +1,6 @@
+node_modules/
+data/
+uploads/
+test/.runtime-data/
+.env
+npm-debug.log*
